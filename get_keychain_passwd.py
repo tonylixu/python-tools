@@ -15,7 +15,7 @@ import subprocess
 
 def main():
     get_keychain_pass('tony@gmail.com', 'imap.gmail.com')
-    get_generic_pass('NETGEAR42-5G-2')
+    get_generic_pass('HomeWifi')
 
 def get_keychain_pass(account=None, server=None):
     '''Search OSX keychain app and return password if found
@@ -40,7 +40,7 @@ def get_keychain_pass(account=None, server=None):
             'server': server,
             'keychain': '/Users/txu/Library/Keychains/login.keychain',
         }
-    command = 'sudo {0} -v {1} -g -a {2} -s {3} {4}'.format(
+    command = 'sudo {0} -v {1} -g -a "{2}" -s "{3}" "{4}"'.format(
         params['security'], params['command'], params['account'],
         params['server'], params['keychain'])
 
@@ -77,7 +77,7 @@ def get_generic_pass(account=None):
             'command': 'find-generic-password',
             'account': account,
         }
-    command = 'sudo {0} -v {1} -g -a {2}'.format(
+    command = 'sudo {0} -v {1} -g -a "{2}"'.format(
         params['security'], params['command'], params['account'])
 
     try:
