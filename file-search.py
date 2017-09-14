@@ -23,3 +23,22 @@ Usage:
 '''
 import stat, sys, os, string, commands
 
+# Get search pattern from user input
+try:
+    pattern = raw_input("Enter the file pattern to search for:\n")
+    command_string = "find " + pattern
+    command_out = commands.getoutput(command_string)
+    find_results = string.split(command_output, "\n")
+
+    print("Files:")
+    for f in find_results:
+        mode = stat.S_IMODE(os.lstat(f)[stat.ST_MODE])
+        print("Permissions for file {0}".format(f))
+        for level in 'USR', 'GRP', 'OTH':
+            for perm in 'R', 'W', 'X':
+                if mode & getattr(stat,"S_I"+perm+level):
+                    print('{0} has {1} permission'.format(level, perm))
+                else:
+                    print('{0} does NOT have {1} permission'.format(level, perm))
+except:
+    print("There was a problem - check the message above")
