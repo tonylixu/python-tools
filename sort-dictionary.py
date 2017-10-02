@@ -7,10 +7,17 @@ third item in the list.
 
     Exmaple:
     students = {
-        'John': ['A', 15],
-        'Jane': ['A', 12],
-        'Dave': ['A', 13]    
-    }
-    $ print_function(students)
+        'John': ['Grade1', 'Male', 15],
+        'Jane': ['Grade2', 'Female', 12],
+        'Dave': ['Grade3', 'Male', 13]}
+    $ sort-dictionary:students
     { 'Jane': ['A', 12], 'Dave': ['A', 13], 'John': ['A', 15] }
 '''
+
+students = {
+    'John': ['Grade1', 'Male', 15],
+    'Jane': ['Grade2', 'Female', 12],
+    'Dave': ['Grade3', 'Male', 13]}
+
+sorted_students = sorted(students.items(), key=lambda s:s[1][2])
+print(sorted_students)
