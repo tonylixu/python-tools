@@ -19,5 +19,9 @@ students = {
     'Jane': ['Grade2', 'Female', 12],
     'Dave': ['Grade3', 'Male', 13]}
 
+# Staring from Python2.4, both list.sort() and sorted() added a key para
+# to specify a function to be called on each list element to making comparisons.
+# This tech is fast because the key func is called exactly once.
+# https://wiki.python.org/moin/HowTo/Sorting#Sortingbykeys
 sorted_students = sorted(students.items(), key=lambda s:s[1][2])
 print(sorted_students)
