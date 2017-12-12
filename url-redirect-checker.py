@@ -15,3 +15,9 @@ def check_for_redirects(url):
         return '[timeout]'
     except requests.exceptions.ConnectionError:
         return '[connection error]'
+
+def check_domains(urls):
+    for url in urls:
+        url_to_check = url if url.startswith('http') else "http://%s" % url
+        redirect_url = check_for_redirects(url_to_check)
+        print("%s => %s" % (url_to_check, redirect_url))
