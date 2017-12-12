@@ -1,5 +1,21 @@
 '''
 This python script checks whether a list of given URLs been redirected.
+
+Sample input:
+google.com
+http://gmail.com
+www.ibm.com
+redhat.com
+example.com
+i-believe-this-domain-does-not-exist-123abc.com
+
+Sample output:
+http://google.com => http://www.google.com/
+http://gmail.com => http://mail.google.com/mail/
+http://www.ibm.com => http://www.ibm.com/us/en/
+http://redhat.com => http://www.redhat.com/
+http://example.com => http://www.iana.org/domains/example/
+http://i-believe-this-domain-does-not-exist-123abc.com => [connection error]
 '''
 import sys
 import requests
