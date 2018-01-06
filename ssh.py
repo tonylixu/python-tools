@@ -3,8 +3,8 @@ from __future__ import print_function
 import subprocess
 import sys
 
-HOST = "www.example.com"
-USER = "tony"
+HOST = sys.argv[1]
+USER = sys.argv[2]
 # Ports are hendled in ~/.ssh/config since we use OpenSSH
 COMMAND = "uname -a"
 
@@ -15,6 +15,6 @@ ssh = subprocess.Popen(["ssh", "{}@{}".format(USER, HOST), COMMAND],
 result = ssh.stdout.readlines()
 if result == []:
     error = ssh.stderr.readlines()
-    print("ERROR: {}".format(error)), file=sys.stderr)
+    print("ERROR: {}".format(error), file=sys.stderr)
 else:
     print(result)
