@@ -1,7 +1,16 @@
 from __future__ import print_function
 
+'''
+A SSH command line simulator written in Python
+'''
+
 import subprocess
 import sys
+
+if len(sys.argv) != 3:
+    print("No enough parameters")
+    print("Example: python ssh.py host username")
+    sys.exit(-1)
 
 HOST = sys.argv[1]
 USER = sys.argv[2]
