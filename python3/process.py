@@ -10,3 +10,9 @@ import sys
 from datetime import datetime, timedelta
 from subprocess import Popen, PIPE
 from systematic.classes import SortableContainer
+
+TIME_FORMATS = (
+    '%a %b %d %H:%M:%S %Y',
+    '%a %d %b %H:%M:%S %Y',
+)
+
