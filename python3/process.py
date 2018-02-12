@@ -16,3 +16,17 @@ TIME_FORMATS = (
     '%a %d %b %H:%M:%S %Y',
 )
 
+PS_FIELDS = (
+    'lstart',
+    'ppid',
+    'pid',
+    'ruid',
+    'rgid',
+    'ruser',
+    'vsz',
+    'rss',
+    'state',
+    'tdev',
+    'time',
+    'command',
+)
