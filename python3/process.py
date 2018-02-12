@@ -44,3 +44,10 @@ class Process():
         keys = [x for x in keys]
         lstart_index = keys.index('lstart')
         fields = line.decode('utf-8').split()
+
+        if lstart_index != -1:
+            self.started = self.__parse_date__(' '.join(fields[lstart_index:lstart_index+5]))
+            fields = fields[:lstart_index] + fields[lstart_index+5]
+            keys.remove('lstart')
+        else:
+            self.started = None
