@@ -30,3 +30,6 @@ PS_FIELDS = (
     'time',
     'command',
 )
+
+class ProcessError(Exception):
+    pass
