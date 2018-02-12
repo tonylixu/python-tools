@@ -33,3 +33,14 @@ PS_FIELDS = (
 
 class ProcessError(Exception):
     pass
+
+class Process():
+    '''
+    Process class definition
+
+    To sort these properly, keys must include at least 'pid' and 'ruser' or 'user'
+    '''
+    def __init__(self, keys, line):
+        keys = [x for x in keys]
+        lstart_index = keys.index('lstart')
+        fields = line.decode('utf-8').split()
