@@ -33,3 +33,38 @@ PS_FIELDS = (
 
 class ProcessError(Exception):
     pass
+
+class Process():
+    '''
+    Process class definition
+
+    To sort these properly, keys must include at least 'pid' and 'ruser' or 'user'
+    '''
+    def __init__(self, keys, line):
+        keys = [x for x in keys]
+        lstart_index = keys.index('lstart')
+        fields = line.decode('utf-8').split()
+
+        if lstart_index != -1:
+            self.started = self.__parse_date__(' '.join(fields[lstart_index:lstart_index+5]))
+            fields = fields[:lstart_index] + fields[lstart_index+5]
+            keys.remove('lstart')
+        else:
+            self.started = None
+
+        for key in keys:
+            try:
+                if key == 'command':
+                    value = ' '.join(fields[keys.index(key):])
+                else:
+                    value = fields[keys.index(key)]
+            except IndexError as e:
+                value = None
+            
+            if key not in ('ruser', 'user', 'time', 'tdev', 'state', 'command'):
+                try:
+                    value = int(value)
+                except ValueError:
+                    pass
+                    
+            setattr(self, key, value)
