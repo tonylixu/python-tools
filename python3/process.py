@@ -51,3 +51,20 @@ class Process():
             keys.remove('lstart')
         else:
             self.started = None
+
+        for key in keys:
+            try:
+                if key == 'command':
+                    value = ' '.join(fields[keys.index(key):])
+                else:
+                    value = fields[keys.index(key)]
+            except IndexError as e:
+                value = None
+            
+            if key not in ('ruser', 'user', 'time', 'tdev', 'state', 'command'):
+                try:
+                    value = int(value)
+                except ValueError:
+                    pass
+                    
+            setattr(self, key, value)
