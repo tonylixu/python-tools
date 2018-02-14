@@ -68,3 +68,6 @@ class Process():
                     pass
                     
             setattr(self, key, value)
+    
+    def __repr__(self):
+        return '{0} {1} {2}'.format(self.username, self.pid, self.command)
