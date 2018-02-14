@@ -72,7 +72,7 @@ class Process():
     def __repr__(self):
         return '{0} {1} {2}'.format(self.username, self.pid, self.command)
     
-     def __parse_date__(self, value):
+    def __parse_date__(self, value):
         for fmt in TIME_FORMATS:
             try:
                 return datetime.strptime(value, fmt)
