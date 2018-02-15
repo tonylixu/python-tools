@@ -91,3 +91,13 @@ class Process():
         if sys.platform == 'darwin' or not hasattr(self, 'sess'):
             return False
         return self.sess == 0
+
+    @property
+    def userid(self):
+        """Sort user ID
+        Usually we sort by ruid key, but allow other options as well
+        """
+        for key in ('ruid', 'uid'):
+            if hasattr(self, key):
+                return getattr(self, key)
+        return None
