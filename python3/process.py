@@ -101,3 +101,10 @@ class Process():
             if hasattr(self, key):
                 return getattr(self, key)
         return None
+
+    @property
+    def basename(self):
+        """Executable basename
+        Returns name of executable without path
+        """
+        return os.path.basename(self.command)
