@@ -79,3 +79,15 @@ class Process():
             except ValueError:
                 pass
         return None
+
+    @property
+    def is_kernel_process(self):
+        '''
+        Kernel process flag
+        
+        Kernel processes are in session 0. If sess is not known, False is returned
+        Note: OS/X ps does not show kernel processes like linux and BSDs and sess is always 0
+        '''
+        if sys.platform == 'darwin' or not hasattr(self, 'sess'):
+            return False
+        return self.sess == 0
