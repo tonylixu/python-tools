@@ -113,3 +113,5 @@ class Processes(list):
     """
     Load OS process list
     """
+    def __init__(self, fields=PS_FIELDS):
+        self.update(fields)
