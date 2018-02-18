@@ -141,3 +141,32 @@ class Processes(list):
         if reverse:
             results.reverse()
         return results
+
+    def filter(self, *args, **kwargs):
+        """Filter entries
+        Filters entries matching given filters. Filter must be a
+        - list of key=value strings
+        - dictionary with valid keys
+        """
+        filters = []
+        try:
+            filters = [(key, pattern) for x in args for key, pattern in x.split('=', 1)]
+        except ValueError as e:
+            raise ProcessError('Invalid filter list: {0}: {1}'.format(args, e))
+        filters.extend(kwargs.items())
+
+        filtered = []
+        for entry in self:
+            matches = True
+            for key, pattern in filters:
+                if not hasattr(entry, key):
+                    raise ProcessError('Invalid filter key: {0}'.format(key))
+                if not re.compile('{0}'.format(pattern)).match('{0}'.format(getattr(entry, key))):
+                    matches = False
+                    break
+
+            if matches:
+                filtered.append(entry)
+
+        filtered.sort()
+        return filtered
