@@ -115,3 +115,20 @@ class Processes(list):
     """
     def __init__(self, fields=PS_FIELDS):
         self.update(fields)
+    
+    def update(self, fields):
+        del self[0:len(self)]
+
+        try:
+            cmd =  [ 'ps', '-wwaxo', ','.join(fields) ]
+            p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+            stdout, stderr = p.communicate()
+            if p.returncode != 0:
+                raise ProcessError('Error running ps: {0}'.format(stderr))
+        except OSError as e:
+            raise ProcessError('Error running ps: {0}'.format(e))
+
+        for line in stdout.splitlines()[1:]:
+            self.append(Process(fields, line))
+
+        self.sort()
