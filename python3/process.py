@@ -108,21 +108,65 @@ class Process():
         Returns name of executable without path
         """
         return os.path.basename(self.command)
-
-    @property
-    def realpath(self):
-        """Executable real path
-        Try to lookup executable realpath for process from /proc filesystem.
-        Returns None if /proc is not available or details not readable.
-        """
-        if not hasattr(self, 'pid'):
-            return None
-
-        exe = '/proc/{0}/exe'.format(self.pid)
-        if not os.path.islink(exe):
-            return None
+        
+class Processes(list):
+    """
+    Load OS process list
+    """
+    def __init__(self, fields=PS_FIELDS):
+        self.update(fields)
+    
+    def update(self, fields):
+        del self[0:len(self)]
 
         try:
-            return os.path.realpath(exe)
-        except:
-            return None
+            cmd =  [ 'ps', '-wwaxo', ','.join(fields) ]
+            p = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
+            stdout, stderr = p.communicate()
+            if p.returncode != 0:
+                raise ProcessError('Error running ps: {0}'.format(stderr))
+        except OSError as e:
+            raise ProcessError('Error running ps: {0}'.format(e))
+
+        for line in stdout.splitlines()[1:]:
+            self.append(Process(fields, line))
+
+        self.sort()
+
+    def sorted_by_field(self, field, reverse=False):
+        """Sort processes in-list by given field.
+        If reverse is True, the in-line ordering is reversed after sorting.
+        """
+        results =  [entry for entry in sorted(key=field)]
+        if reverse:
+            results.reverse()
+        return results
+
+    def filter(self, *args, **kwargs):
+        """Filter entries
+        Filters entries matching given filters. Filter must be a
+        - list of key=value strings
+        - dictionary with valid keys
+        """
+        filters = []
+        try:
+            filters = [(key, pattern) for x in args for key, pattern in x.split('=', 1)]
+        except ValueError as e:
+            raise ProcessError('Invalid filter list: {0}: {1}'.format(args, e))
+        filters.extend(kwargs.items())
+
+        filtered = []
+        for entry in self:
+            matches = True
+            for key, pattern in filters:
+                if not hasattr(entry, key):
+                    raise ProcessError('Invalid filter key: {0}'.format(key))
+                if not re.compile('{0}'.format(pattern)).match('{0}'.format(getattr(entry, key))):
+                    matches = False
+                    break
+
+            if matches:
+                filtered.append(entry)
+
+        filtered.sort()
+        return filtered
