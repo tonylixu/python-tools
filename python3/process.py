@@ -132,3 +132,12 @@ class Processes(list):
             self.append(Process(fields, line))
 
         self.sort()
+
+    def sorted_by_field(self, field, reverse=False):
+        """Sort processes in-list by given field.
+        If reverse is True, the in-line ordering is reversed after sorting.
+        """
+        results =  [entry for entry in sorted(key=field)]
+        if reverse:
+            results.reverse()
+        return results
