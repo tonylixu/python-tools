@@ -108,21 +108,8 @@ class Process():
         Returns name of executable without path
         """
         return os.path.basename(self.command)
-
-    @property
-    def realpath(self):
-        """Executable real path
-        Try to lookup executable realpath for process from /proc filesystem.
-        Returns None if /proc is not available or details not readable.
-        """
-        if not hasattr(self, 'pid'):
-            return None
-
-        exe = '/proc/{0}/exe'.format(self.pid)
-        if not os.path.islink(exe):
-            return None
-
-        try:
-            return os.path.realpath(exe)
-        except:
-            return None
+        
+class Processes(list):
+    """
+    Load OS process list
+    """
