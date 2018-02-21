@@ -2,7 +2,6 @@
 Common wrapper classes defintion
 """
 import os
-import pwd
 
 # STDOUT: a special value that can be used as stderr argument and
 # make standard error goes to the same handler
