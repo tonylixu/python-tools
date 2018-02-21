@@ -33,3 +33,6 @@ class SortableContainer(object):
             
         else:
             raise "compare_fields is empty"
+
+    def __eq__(self, other):
+        return self.__cmp_fields__(other) == 0
