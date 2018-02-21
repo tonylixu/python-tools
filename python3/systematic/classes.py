@@ -10,3 +10,16 @@ import pwd
 # CalledProcessError: An exception
 from subprocess import STDOUT, check_output, CalledProcessError
 from systematic.log import Logger, LoggerError
+
+class SortableContainer(object):
+    """
+    Sortable containers
+
+    Sort objects by comparing attributes specified in tuple
+    self.compare_fields
+
+    List of attributes must match for compared objects or
+    comparison will fail
+    """
+    # Define compare fiedls tuple
+    compare_fields = ()
