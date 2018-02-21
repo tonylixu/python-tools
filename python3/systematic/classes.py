@@ -23,3 +23,14 @@ class SortableContainer(object):
     """
     # Define compare fiedls tuple
     compare_fields = ()
+
+    def __cmp_fields__(self, other):
+        if self.compare_fields:
+            for field in self.compare_fields:
+                a = getattr(self, field)
+                b = getattr(other, field)
+                if a != b:
+                    return (a > b) - (a < b)
+            
+        else:
+            raise "compare_fields is empty"
