@@ -1,3 +1,15 @@
 # Python bytecode
 *.pyc
 ref.txt
+/build/
+/dist/
+/doc/
+/test/data/*
+.DS_Store
+/.idea/
+/.cache/
+/.eggs/
+.*.swp
+*.pyc
+*.egg-info/
+config.dox
