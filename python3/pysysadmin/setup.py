@@ -10,4 +10,12 @@ setup(
     author = 'Tony Li Xu',
     author_email = 'tonylixu@gmail.com',
     license = 'Apache',
+    packages=['pysysadmin'],
+    setup_requires = (
+        'pytest-runner',
+    ),
+    tests_require = (
+        'pytest',
+        'pytest-datafiles',
+    ),
 )
