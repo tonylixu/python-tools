@@ -38,9 +38,12 @@ class Day():
         else:
             input_format = input_format is not None and input_format or DEFAULT_DATE_FORMAT
             try:
+                # Return a datetime obj corresponding to value, parsed according to format
+                # datetime.strptime("00-Nov-28", "%y-%b-%d").date() will print
+                # 2000-11-28
                 self.value = datetime.strptime(str(value), input_format).date()
             except ValueError:
                 try:
                     self.value = date(*time.localtime(int(value))[:3])
                 except ValueError:
-                    raise DatesError('Error parsing date: {0}'.format(value))
+                    raise 'Error parsing date: {0}'.format(value)
