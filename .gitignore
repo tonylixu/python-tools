@@ -13,3 +13,8 @@ ref.txt
 *.pyc
 *.egg-info/
 config.dox
+
+python3/Include/*
+python3/Lib/*
+python3/Scripts/*
+python3/tcl/*

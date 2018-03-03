@@ -47,3 +47,8 @@ class Day():
                     self.value = date(*time.localtime(int(value))[:3])
                 except ValueError:
                     raise 'Error parsing date: {0}'.format(value)
+
+    def __getattr__(self, attr):
+        if attr == 'weekday':
+            return self.value.isoweekday()
+        return getattr(self.value, attr)
