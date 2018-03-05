@@ -52,3 +52,6 @@ class Day():
         if attr == 'weekday':
             return self.value.isoweekday()
         return getattr(self.value, attr)
+
+    def __str__(self):
+        return self.value.strftime(DEFAULT_DATE_FORMAT)
