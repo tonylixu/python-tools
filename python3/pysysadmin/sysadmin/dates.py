@@ -72,3 +72,6 @@ class Day():
 
     def __ne__(self, value):
         return long(self) != long(value)
+
+    def __gt__(self, value):
+        return long(self) > long(value)
