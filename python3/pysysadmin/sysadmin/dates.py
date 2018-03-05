@@ -66,3 +66,6 @@ class Day():
     # Convert to a long integer
     def __long__(self):
         return long(self.value.strftime('%s'))
+
+    def __eq__(self, value):
+        return long(self) == long(value)
