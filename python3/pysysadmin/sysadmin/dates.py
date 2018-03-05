@@ -59,3 +59,6 @@ class Day():
     # value is a date obj
     def strftime(self, value):
         return self.value.strftime(value)
+
+    def __repr__(self):
+        return self.__str__()
