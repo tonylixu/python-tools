@@ -75,3 +75,6 @@ class Day():
 
     def __gt__(self, value):
         return long(self) > long(value)
+
+    def __lt__(self, value):
+        return long(self) < long(value)
