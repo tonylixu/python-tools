@@ -62,3 +62,7 @@ class Day():
 
     def __repr__(self):
         return self.__str__()
+
+    # Convert to a long integer
+    def __long__(self):
+        return long(self.value.strftime('%s'))
