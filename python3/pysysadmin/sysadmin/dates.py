@@ -55,3 +55,7 @@ class Day():
 
     def __str__(self):
         return self.value.strftime(DEFAULT_DATE_FORMAT)
+
+    # value is a date obj
+    def strftime(self, value):
+        return self.value.strftime(value)
