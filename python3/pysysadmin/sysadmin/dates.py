@@ -52,3 +52,35 @@ class Day():
         if attr == 'weekday':
             return self.value.isoweekday()
         return getattr(self.value, attr)
+
+    def __str__(self):
+        return self.value.strftime(DEFAULT_DATE_FORMAT)
+
+    # value is a date obj
+    def strftime(self, value):
+        return self.value.strftime(value)
+
+    def __repr__(self):
+        return self.__str__()
+
+    # Convert to a long integer
+    def __long__(self):
+        return long(self.value.strftime('%s'))
+
+    def __eq__(self, value):
+        return long(self) == long(value)
+
+    def __ne__(self, value):
+        return long(self) != long(value)
+
+    def __gt__(self, value):
+        return long(self) > long(value)
+
+    def __lt__(self, value):
+        return long(self) < long(value)
+    
+    def __le__(self, value):
+        return long(self) <= long(value)
+
+    def __ge__(self, value):
+        return long(self) >= long(value)
