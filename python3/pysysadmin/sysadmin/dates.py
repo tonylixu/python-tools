@@ -85,7 +85,7 @@ class Day():
     def __ge__(self, value):
         return long(self) >= long(value)
 
-     def __sub__(self, value):
+    def __sub__(self, value):
         try:
             return Day(self.value - timedelta(days=value))
         except ValueError:
