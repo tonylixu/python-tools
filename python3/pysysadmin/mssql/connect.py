@@ -9,7 +9,7 @@
 import json        # Provide Json format operations
 import pypyodbc    # The connector lib
 
-def connect_to_db(table='test')
+def connect_to_db(table='test'):
     """Database connection handler
 
     Define the database connection string and connect
